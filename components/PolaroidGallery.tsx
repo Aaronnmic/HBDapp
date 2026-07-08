@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useRef, useState } from 'react'
 import content from '../data/content.json'
+import { withBasePath } from '../lib/assetPath'
 
 const { chapter, title, photos } = content.gallery
 const EDGE_THRESHOLD = 4
@@ -56,7 +57,7 @@ export default function PolaroidGallery(){
                 className="group relative shrink-0 basis-full snap-start overflow-hidden rounded-[2rem] border border-white/10 bg-card p-4 text-left shadow-glow transition hover:-translate-y-1 hover:shadow-[0_28px_80px_rgba(229,106,179,0.2)] sm:basis-[calc(50%-10px)] lg:basis-[calc(33.333%-14px)]"
               >
                 <div className="relative overflow-hidden rounded-3xl bg-slate-950/60">
-                  <img src={photo.src} alt={photo.title} className="h-56 w-full object-cover transition duration-500 group-hover:scale-105" />
+                  <img src={withBasePath(photo.src)} alt={photo.title} className="h-56 w-full object-cover transition duration-500 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 </div>
                 <div className="mt-4 space-y-2">
@@ -90,7 +91,7 @@ export default function PolaroidGallery(){
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-6">
             <div className="relative max-w-5xl rounded-[2rem] border border-white/10 bg-[#07070a] p-6 shadow-[0_40px_120px_rgba(0,0,0,0.55)] transition-opacity duration-500 opacity-100">
               <button onClick={() => setActive(null)} className="absolute right-4 top-4 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white transition hover:bg-white/10">Close</button>
-              <img src={photos[active].src} alt={photos[active].title} className="w-full rounded-[1.5rem] object-cover" />
+              <img src={withBasePath(photos[active].src)} alt={photos[active].title} className="w-full rounded-[1.5rem] object-cover" />
               <div className="mt-5 text-left">
                 <h3 className="text-3xl font-semibold text-white">{photos[active].title}</h3>
                 <p className="mt-3 text-slate-300/90 leading-8">{photos[active].caption}</p>

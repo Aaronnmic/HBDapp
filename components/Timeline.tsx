@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react'
 import content from '../data/content.json'
+import { withBasePath } from '../lib/assetPath'
 
 const { chapter, title, entries } = content.timeline
 
@@ -24,7 +25,7 @@ export default function Timeline(){
                 <div className="text-xl font-semibold text-[#6B2247]">{entry.title}</div>
                 <p className="mt-3 text-[#6B2247]/80 leading-8">{entry.description}</p>
                 {entry.photo && active === index && (
-                  <img src={entry.photo} alt={entry.title} className="mt-4 w-full max-h-72 rounded-2xl object-cover" />
+                  <img src={withBasePath(entry.photo)} alt={entry.title} className="mt-4 w-full max-h-72 rounded-2xl object-cover" />
                 )}
                 {entry.photo && active !== index && (
                   <div className="mt-3 text-xs uppercase tracking-[0.2em] text-[#D6488F]/70">Tap to see photo</div>

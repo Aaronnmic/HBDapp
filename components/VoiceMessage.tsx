@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Howl } from 'howler'
 import { useInteractive } from '../context/InteractiveProvider'
 import content from '../data/content.json'
+import { withBasePath } from '../lib/assetPath'
 
 const { chapter, title, intro, caption, audioSrc } = content.voice
 
@@ -13,7 +14,7 @@ export default function VoiceMessage(){
 
   useEffect(() => {
     howl.current = new Howl({
-      src: [audioSrc],
+      src: [withBasePath(audioSrc)],
       onend: () => {
         setPlaying(false)
         restoreAmbient()

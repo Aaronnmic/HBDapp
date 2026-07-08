@@ -4,6 +4,7 @@ import { Howl } from 'howler'
 import { fireConfetti } from '../utils/confetti'
 import useKonami from '../hooks/useKonami'
 import { initLenis } from '../lib/lenis'
+import { withBasePath } from '../lib/assetPath'
 import content from '../data/content.json'
 
 type Ctx = {
@@ -34,7 +35,7 @@ export default function InteractiveProvider({ children }: { children: React.Reac
   useEffect(() => {
     const src = content.hero.audioSrc
     if (!src) return
-    const sound = new Howl({ src: [src], volume: 0, loop: true })
+    const sound = new Howl({ src: [withBasePath(src)], volume: 0, loop: true })
     soundRef.current = sound
 
     sound.on('play', () => setAmbientPlaying(true))

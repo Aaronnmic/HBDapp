@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useInteractive } from '../context/InteractiveProvider'
 import content from '../data/content.json'
+import { withBasePath } from '../lib/assetPath'
 
 const BLOW_THRESHOLD = 45
 const { chapter, title, image, intro, micButtonLabel, blowButtonLabel, listeningLabel, micDeniedText, wishText } = content.cake
@@ -70,7 +71,7 @@ export default function CakeSection(){
         <div className="inline-flex flex-col items-center gap-6">
           <div className="bg-card rounded-[2rem] p-6 shadow-glow border border-white/10">
             <div className="cake-photo-scene">
-              <img src={image} alt="Birthday cake" className="cake-photo" />
+              <img src={withBasePath(image)} alt="Birthday cake" className="cake-photo" />
               <div className="cake-photo-candles">
                 {[0, 1, 2].map((i) => (
                   <div key={i} className="cake-candle">
