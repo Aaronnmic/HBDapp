@@ -45,9 +45,14 @@ export default function GiftBox() {
 
         {!envelopeReady && !letterOpened && (
           <>
-            <div className="mx-auto flex h-56 items-center justify-center">
+            <button
+              onClick={handleOpen}
+              disabled={opened}
+              aria-label={buttonLabel}
+              className="mx-auto flex h-56 w-full items-center justify-center disabled:cursor-default"
+            >
               <span className={`text-[130px] leading-none ${opened ? 'animate-shake-letter' : ''}`}>🎁</span>
-            </div>
+            </button>
             <button
               onClick={handleOpen}
               disabled={opened}

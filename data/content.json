@@ -134,6 +134,12 @@
   },
   "easterEggs": {
     "moonMessage": "Even on the nights we couldn't talk, I'd look at the moon knowing you were somewhere looking at it too.",
-    "heartNote": "You found the hidden note. This one's simple: I'm endlessly grateful for you."
+    "heartNote": "You found the hidden note. This one's simple: I'm endlessly grateful for you.",
+    "hintPrompt": "There are a couple of secrets hiding on this page.",
+    "hintMoon": "There's something glowing in the corner of the sky — try tapping it.",
+    "hintHeart": "Hold me a little longer... my heart gets squeezed whenever you're near.",
+    "hintOneMore": "Nice! There's one more secret waiting to be found.",
+    "hintAwesome": "Awesome, you found them both! ❤️",
+    "hintWaitingLabel": "Go find it!"
   }
 }

@@ -13,6 +13,12 @@ type Ctx = {
   toggleAmbient: () => void
   duckAmbient: () => void
   restoreAmbient: () => void
+  foundMoon: boolean
+  foundHeart: boolean
+  hintTarget: 'moon' | 'heart' | null
+  requestHint: () => void
+  markFound: (which: 'moon' | 'heart') => void
+  resetEggs: () => void
 }
 const C = createContext<Ctx | undefined>(undefined)
 
@@ -28,6 +34,25 @@ export default function InteractiveProvider({ children }: { children: React.Reac
   const wasDucked = useRef(false)
   const pauseTimeout = useRef<number | null>(null)
   const [ambientPlaying, setAmbientPlaying] = useState(false)
+  const [foundMoon, setFoundMoon] = useState(false)
+  const [foundHeart, setFoundHeart] = useState(false)
+  const [hintTarget, setHintTarget] = useState<'moon' | 'heart' | null>(null)
+
+  const requestHint = useCallback(() => {
+    setHintTarget(!foundMoon ? 'moon' : !foundHeart ? 'heart' : null)
+  }, [foundMoon, foundHeart])
+
+  const markFound = useCallback((which: 'moon' | 'heart') => {
+    if (which === 'moon') setFoundMoon(true)
+    else setFoundHeart(true)
+    setHintTarget(null)
+  }, [])
+
+  const resetEggs = useCallback(() => {
+    setFoundMoon(false)
+    setFoundHeart(false)
+    setHintTarget(null)
+  }, [])
 
   useKonami(()=>{ celebrate() })
   useEffect(()=>{ initLenis() }, [])
@@ -38,14 +63,14 @@ export default function InteractiveProvider({ children }: { children: React.Reac
     const sound = new Howl({ src: [withBasePath(src)], volume: 0, loop: true })
     soundRef.current = sound
 
-    sound.on('play', () => setAmbientPlaying(true))
-    sound.on('pause', () => setAmbientPlaying(false))
-    sound.on('stop', () => setAmbientPlaying(false))
-
     // Browsers block non-gesture audio autoplay. Attempt immediately, then
     // fall back to starting on the visitor's first genuine click/tap/keypress.
+    // ambientPlaying is set explicitly here (not via a generic 'play' listener)
+    // so it only reflects this one-time autoplay confirmation — manual toggles
+    // below set it themselves, immediately, instead of waiting on Howler events.
     sound.once('play', () => {
       sound.fade(0, 0.7, 2500)
+      setAmbientPlaying(true)
       window.removeEventListener('pointerdown', tryPlay)
       window.removeEventListener('keydown', tryPlay)
     })
@@ -70,9 +95,11 @@ export default function InteractiveProvider({ children }: { children: React.Reac
       pauseTimeout.current = null
     }
     if (sound.playing()) {
+      setAmbientPlaying(false)
       sound.fade(sound.volume(), 0, 1000)
       pauseTimeout.current = window.setTimeout(() => sound.pause(), 1000)
     } else {
+      setAmbientPlaying(true)
       sound.play()
       sound.fade(0, 0.7, 1200)
     }
@@ -82,6 +109,7 @@ export default function InteractiveProvider({ children }: { children: React.Reac
     const sound = soundRef.current
     if (!sound || !sound.playing()) return
     wasDucked.current = true
+    setAmbientPlaying(false)
     sound.fade(sound.volume(), 0, 400)
     window.setTimeout(() => sound.stop(), 400)
   }, [])
@@ -90,13 +118,14 @@ export default function InteractiveProvider({ children }: { children: React.Reac
     const sound = soundRef.current
     if (!sound || !wasDucked.current) return
     wasDucked.current = false
+    setAmbientPlaying(true)
     sound.play()
     sound.fade(0, 0.7, 800)
   }, [])
 
   const value = useMemo(
-    () => ({ celebrate, ambientPlaying, toggleAmbient, duckAmbient, restoreAmbient }),
-    [celebrate, ambientPlaying, toggleAmbient, duckAmbient, restoreAmbient]
+    () => ({ celebrate, ambientPlaying, toggleAmbient, duckAmbient, restoreAmbient, foundMoon, foundHeart, hintTarget, requestHint, markFound, resetEggs }),
+    [celebrate, ambientPlaying, toggleAmbient, duckAmbient, restoreAmbient, foundMoon, foundHeart, hintTarget, requestHint, markFound, resetEggs]
   )
 
   return (

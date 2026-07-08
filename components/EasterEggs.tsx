@@ -1,5 +1,6 @@
 "use client"
 import { useRef, useState } from 'react'
+import { useInteractive } from '../context/InteractiveProvider'
 import content from '../data/content.json'
 
 const { moonMessage: moonMessageText, heartNote: heartNoteText } = content.easterEggs
@@ -8,9 +9,13 @@ export default function EasterEggs(){
   const [moonMessage, setMoonMessage] = useState(false)
   const [heartNote, setHeartNote] = useState(false)
   const pressTimer = useRef<number | null>(null)
+  const { hintTarget, markFound } = useInteractive()
 
   function startPress(){
-    pressTimer.current = window.setTimeout(() => setHeartNote(true), 600)
+    pressTimer.current = window.setTimeout(() => {
+      setHeartNote(true)
+      markFound('heart')
+    }, 600)
   }
 
   function cancelPress(){
@@ -24,14 +29,17 @@ export default function EasterEggs(){
     <div className="pointer-events-none fixed inset-0 z-30">
       <button
         aria-label="moon"
-        className="pointer-events-auto fixed right-6 top-6 text-2xl opacity-60 transition hover:opacity-100"
-        onClick={() => setMoonMessage(true)}
+        className={`pointer-events-auto fixed right-6 top-6 text-2xl opacity-60 transition hover:opacity-100 ${hintTarget === 'moon' ? 'animate-hint-zoom' : ''}`}
+        onClick={() => {
+          setMoonMessage(true)
+          markFound('moon')
+        }}
       >
         🌙
       </button>
       <button
         aria-label="heart"
-        className="pointer-events-auto fixed left-6 top-6 text-2xl opacity-60 transition hover:opacity-100"
+        className={`pointer-events-auto fixed left-6 top-6 text-2xl opacity-60 transition hover:opacity-100 ${hintTarget === 'heart' ? 'animate-heart-squeeze' : ''}`}
         onMouseDown={startPress}
         onMouseUp={cancelPress}
         onMouseLeave={cancelPress}

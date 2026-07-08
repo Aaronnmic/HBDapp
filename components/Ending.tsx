@@ -1,14 +1,30 @@
 "use client"
 import { useEffect, useRef } from 'react'
+import { useInteractive } from '../context/InteractiveProvider'
 import content from '../data/content.json'
 
 type Particle = { x: number; y: number; vx: number; vy: number; life: number; color: string }
 
 const COLORS = ['#E56AB3', '#FF6B9D', '#C2185B', '#FFD37A']
 const { title, line1, line2 } = content.ending
+const { hintPrompt, hintMoon, hintHeart, hintOneMore, hintAwesome, hintWaitingLabel } = content.easterEggs
 
 export default function Ending(){
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const { foundMoon, foundHeart, hintTarget, requestHint, resetEggs } = useInteractive()
+
+  const bothFound = foundMoon && foundHeart
+  const oneFound = foundMoon !== foundHeart
+  const waitingToFind = hintTarget !== null && !bothFound
+
+  let hintText = hintPrompt
+  if (bothFound) hintText = hintAwesome
+  else if (hintTarget === 'moon') hintText = hintMoon
+  else if (hintTarget === 'heart') hintText = hintHeart
+  else if (oneFound) hintText = hintOneMore
+
+  const hintButtonLabel = bothFound ? 'Start over' : waitingToFind ? hintWaitingLabel : 'Need a hint?'
+  const handleHintClick = bothFound ? resetEggs : requestHint
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -86,6 +102,22 @@ export default function Ending(){
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-gradient-romance">{title}</h2>
         <p className="text-xl text-[#6B2247]/90">{line1}</p>
         <p className="text-lg text-[#8A6478]">{line2}</p>
+
+        <div className="mt-10 flex flex-col items-center gap-3">
+          <p className="max-w-sm text-sm text-[#8A6478]">{hintText}</p>
+          {waitingToFind ? (
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#8A6478]/70">
+              {hintButtonLabel}
+            </span>
+          ) : (
+            <button
+              onClick={handleHintClick}
+              className="rounded-full border border-[#E56AB3]/30 bg-white/60 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#D6488F] transition hover:bg-white/80"
+            >
+              {hintButtonLabel}
+            </button>
+          )}
+        </div>
       </div>
     </section>
   )
