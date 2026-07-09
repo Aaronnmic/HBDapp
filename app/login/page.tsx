@@ -1,40 +1,40 @@
 "use client"
-import { useEffect, useState, type ReactNode, type FormEvent } from 'react'
-import content from '../data/content.json'
+import { useState, type FormEvent } from 'react'
+import gate from '../../data/gate.json'
 
-const { title, subtitle, placeholder, password, unlockLabel, wrongMessage, hintButtonLabel, hints } = content.gate
-const STORAGE_KEY = 'story-unlocked'
+const { title, subtitle, placeholder, unlockLabel, wrongMessage, hintButtonLabel, hints } = gate
 
-export default function PasswordGate({ children }: { children: ReactNode }){
-  const [checked, setChecked] = useState(false)
-  const [unlocked, setUnlocked] = useState(false)
+export default function LoginPage(){
   const [value, setValue] = useState('')
   const [wrong, setWrong] = useState(false)
-  const [hintIndex, setHintIndex] = useState(-1)
+  const [submitting, setSubmitting] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [hintIndex, setHintIndex] = useState(-1)
 
-  useEffect(() => {
-    if (window.localStorage.getItem(STORAGE_KEY) === 'true') setUnlocked(true)
-    setChecked(true)
-  }, [])
-
-  function handleSubmit(e: FormEvent){
+  async function handleSubmit(e: FormEvent){
     e.preventDefault()
-    if (value.trim().toLowerCase() === password.trim().toLowerCase()) {
-      window.localStorage.setItem(STORAGE_KEY, 'true')
-      setUnlocked(true)
-    } else {
-      setWrong(true)
-      setValue('')
+    setSubmitting(true)
+    setWrong(false)
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: value }),
+      })
+      if (res.ok) {
+        window.location.href = '/'
+      } else {
+        setWrong(true)
+        setValue('')
+      }
+    } finally {
+      setSubmitting(false)
     }
   }
 
   function handleHint(){
     setHintIndex((i) => (i + 1 < hints.length ? i + 1 : i))
   }
-
-  if (!checked) return null
-  if (unlocked) return <>{children}</>
 
   return (
     <div className="fixed inset-0 z-50 flex min-h-screen items-center justify-center overflow-y-auto bg-gradient-to-br from-[#FCE4EC] via-[#FFF0F5] to-[#FCE4EC] px-6 py-16">
@@ -62,7 +62,11 @@ export default function PasswordGate({ children }: { children: ReactNode }){
           </button>
         </div>
         {wrong && <p className="mt-3 text-xs text-[#C2185B]">{wrongMessage}</p>}
-        <button type="submit" className="mt-5 w-full rounded-full bg-accent px-6 py-3 text-sm font-semibold text-[#3D0F28] transition hover:brightness-110">
+        <button
+          type="submit"
+          disabled={submitting}
+          className="mt-5 w-full rounded-full bg-accent px-6 py-3 text-sm font-semibold text-[#3D0F28] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+        >
           {unlockLabel}
         </button>
         {hints.length > 0 && (

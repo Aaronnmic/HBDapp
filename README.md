@@ -32,7 +32,9 @@ npm run start   # serve the production build
 
 Every section is its own component in `components/` (`StorySection`, `Timeline`, `ReasonsSection`, `PolaroidGallery`, `VoiceMessage`, `GiftBox`, `CakeSection`, `Ending`, plus ambient decoration components like `FloatingHearts`/`AmbientBackground`/`EasterEggs`). Each component imports `data/content.json` and renders whichever slice of it belongs to that chapter — no component hardcodes any copy, image path, or audio path.
 
-`app/page.tsx` assembles the chapters in order and drives the intro loading sequence. `context/InteractiveProvider.tsx` owns shared state that multiple components need — confetti, the Konami-code listener, and the single ambient-audio `Howl` instance (so the hero panel and the floating mini-player button both control the same track, and voice-message playback can duck/restore it).
+`app/(protected)/page.tsx` assembles the chapters in order and drives the intro loading sequence. `context/InteractiveProvider.tsx` owns shared state that multiple components need — confetti, the Konami-code listener, and the single ambient-audio `Howl` instance (so the hero panel and the floating mini-player button both control the same track, and voice-message playback can duck/restore it).
+
+It lives in a `(protected)` route group on purpose — that's the boundary the password gate sits in front of (see below).
 
 ## Customizing everything: `data/content.json`
 
@@ -41,7 +43,6 @@ This is the only file you need to touch to make the site yours. Structure:
 | Key | Drives |
 |---|---|
 | `site` | Page `<title>` / meta description |
-| `gate` | Password screen shown before anything else loads — see [Privacy password gate](#privacy-password-gate) |
 | `hero` | Loading sequence messages, title, subtitle, background music (`audioSrc`) |
 | `story` | "Our Story" chapter — add as many `slides` as you want |
 | `timeline` | Dated milestones — add as many `entries` as you want, `photo` is optional (`null` to omit) |
@@ -59,31 +60,36 @@ Every list (`slides`, `entries`, `items`, `photos`) is rendered by mapping over 
 
 **Audio**: drop files into `public/audio/` and point `hero.audioSrc` / `voice.audioSrc` at `/audio/yourfile.mp3`.
 
-## Privacy password gate
+## Password gate (real, server-side)
 
-The whole experience sits behind a password screen (`components/PasswordGate.tsx`). Nothing in the real page — content, photos, audio — mounts until the correct password is entered, so none of it ever touches the DOM or network tab for someone without the password.
+The whole experience sits behind a password screen enforced by **Next.js Middleware** (`middleware.ts`), not client-side JavaScript. On every request — the page itself, its JS bundle, and any file under `/photos` or `/audio` — the middleware checks a signed session cookie before anything is served. No cookie, or an invalid one, and the request never reaches the protected route at all; it's redirected to `/login` at the edge. Nothing personal ever ships to an unauthenticated browser — not the story text, not the photo filenames, not a password.
 
-Configure it entirely in `data/content.json`'s `gate` key:
+How it works:
 
-| Field | Purpose |
+- `app/login/page.tsx` — the password form (copy configurable via `data/gate.json`: title, subtitle, hints, etc. — no secrets in this file, safe to keep in the repo)
+- `app/api/login/route.ts` — checks the submitted password against the `SITE_PASSWORD` environment variable server-side, and on success signs a session cookie using `SESSION_SECRET` (HMAC-SHA256, 30-day expiry)
+- `middleware.ts` — verifies that cookie's signature on every request; redirects to `/login` if missing or invalid
+- `app/(protected)/` — route group holding the real site; everything in here (and every static file) is what the middleware guards
+
+**Setup**: set two environment variables wherever you deploy —
+
+| Variable | Purpose |
 |---|---|
-| `password` | The password itself, plain text, compared case-insensitively |
-| `title` / `subtitle` / `placeholder` | Copy shown on the lock screen |
-| `unlockLabel` | Submit button text |
-| `wrongMessage` | Shown after an incorrect attempt |
-| `hints` | Optional array of progressive hints — leave `[]` for none. Each tap of "Need a hint?" reveals the next one |
+| `SITE_PASSWORD` | The password itself. Never appears in code or the client bundle. |
+| `SESSION_SECRET` | Random string used to sign session cookies — generate one with `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
 
-Once unlocked, the browser remembers via `localStorage` (key `story-unlocked`) — the gate won't reappear on that device unless the person clears site data or opens it in a different browser/incognito window.
+On Vercel: `vercel env add SITE_PASSWORD production` and `vercel env add SESSION_SECRET production` (repeat for `preview` if you use preview deployments), or set them in the dashboard under Project Settings → Environment Variables. Locally, put them in `.env.local` (already gitignored).
 
-**This is not real security.** The password lives in plain text in the shipped JavaScript bundle — anyone who opens dev tools and reads the source can find it. It's a soft privacy gate to keep the content from being visible to a casual visitor or search crawler, not a substitute for actual authentication.
+**Why this needs a real server**: middleware and API routes only run where Next.js has a server runtime (Vercel, Netlify, self-hosted Node). This means the template can no longer be exported as static files — see below.
 
 ## Deploying
 
-Zero server-side features (no API routes, no database) — deploys anywhere for free:
+Real auth requires a server runtime, so **static export (GitHub Pages) is no longer supported** — Next.js hard-errors if middleware exists alongside `output: 'export'`. Deploy to a platform that runs Next.js server-side:
 
-- **Vercel** — connect the repo, zero config, done.
-- **Netlify** — connect the repo, auto-detected.
-- **GitHub Pages** — add `output: 'export'` to `next.config.js`, run `npm run build`, publish the generated `out/` folder.
+- **Vercel** — connect the repo, add the two env vars above, done.
+- **Netlify** — connect the repo, auto-detected, add the two env vars in site settings.
+
+If you don't need real privacy and would rather have zero-server static hosting back (e.g. GitHub Pages), delete `middleware.ts`, `app/api/login/`, `app/login/`, and the `(protected)` route group split, and re-add `output: 'export'` to `next.config.js` — you're back to a fully static template, just without password protection.
 
 ## A note on the sample content
 

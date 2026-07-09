@@ -3,16 +3,6 @@
     "title": "The Story of Us",
     "description": "An interactive memory journey"
   },
-  "gate": {
-    "title": "This one's just for you",
-    "subtitle": "Enter the password to keep reading.",
-    "placeholder": "Password",
-    "password": "12345678",
-    "unlockLabel": "Unlock",
-    "wrongMessage": "Not quite. Try again.",
-    "hintButtonLabel": "Need a hint?",
-    "hints": ["Bro, try first 8 numbers"]
-  },
   "hero": {
     "loadingSteps": ["Loading...", "127 memories found.", "Ready when you are."],
     "title": "The Story of Us",
