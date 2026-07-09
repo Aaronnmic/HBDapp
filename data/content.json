@@ -3,6 +3,16 @@
     "title": "The Story of Us",
     "description": "An interactive memory journey"
   },
+  "gate": {
+    "title": "This one's just for you",
+    "subtitle": "Enter the password to keep reading.",
+    "placeholder": "Password",
+    "password": "12345678",
+    "unlockLabel": "Unlock",
+    "wrongMessage": "Not quite. Try again.",
+    "hintButtonLabel": "Need a hint?",
+    "hints": ["Bro, try first 8 numbers"]
+  },
   "hero": {
     "loadingSteps": ["Loading...", "127 memories found.", "Ready when you are."],
     "title": "The Story of Us",
@@ -16,6 +26,7 @@
     "slides": [
       { "title": "The Day We Met", "description": "A first smile that changed everything." },
       { "title": "Late night calls", "description": "The nights we stayed up until sunrise." },
+      { "title": "First date", "description": "The night we went to the movies." },
       { "title": "Our first trip", "description": "Every road led to us." }
     ]
   },
@@ -74,6 +85,11 @@
         "title": "The way you see me",
         "description": "You always notice the small, beautiful details. You make ordinary days feel extraordinary.",
         "tag": "Attention to detail"
+      },
+      {
+        "title": "The way you make me feel",
+        "description": "You make me feel like I'm the only person in the world.",
+        "tag": "Love"
       }
     ]
   },
@@ -95,6 +111,11 @@
         "title": "Sunset escape",
         "caption": "A golden drive with the windows down.",
         "src": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "title": "Beautiful you",
+        "caption": "Beautiful you, my love",
+        "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80"
       }
     ]
   },

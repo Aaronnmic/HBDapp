@@ -1,3 +1,5 @@
+# Birthday wishes to someone special
+
 # The Story of Us
 
 An interactive, scroll-driven birthday website — a cinematic "chapters" experience (story, timeline, reasons, gallery, voice message, gift, cake, ending) instead of a static card. Built as a fully reusable template: every word of text, every photo, and every audio file is swapped through a single JSON file — no code editing required to make it your own.
@@ -39,6 +41,7 @@ This is the only file you need to touch to make the site yours. Structure:
 | Key | Drives |
 |---|---|
 | `site` | Page `<title>` / meta description |
+| `gate` | Password screen shown before anything else loads — see [Privacy password gate](#privacy-password-gate) |
 | `hero` | Loading sequence messages, title, subtitle, background music (`audioSrc`) |
 | `story` | "Our Story" chapter — add as many `slides` as you want |
 | `timeline` | Dated milestones — add as many `entries` as you want, `photo` is optional (`null` to omit) |
@@ -55,6 +58,24 @@ Every list (`slides`, `entries`, `items`, `photos`) is rendered by mapping over 
 **Photos**: drop image files into `public/photos/` and point any `"src"`/`"photo"`/`"image"` field at `/photos/yourfile.jpg`.
 
 **Audio**: drop files into `public/audio/` and point `hero.audioSrc` / `voice.audioSrc` at `/audio/yourfile.mp3`.
+
+## Privacy password gate
+
+The whole experience sits behind a password screen (`components/PasswordGate.tsx`). Nothing in the real page — content, photos, audio — mounts until the correct password is entered, so none of it ever touches the DOM or network tab for someone without the password.
+
+Configure it entirely in `data/content.json`'s `gate` key:
+
+| Field | Purpose |
+|---|---|
+| `password` | The password itself, plain text, compared case-insensitively |
+| `title` / `subtitle` / `placeholder` | Copy shown on the lock screen |
+| `unlockLabel` | Submit button text |
+| `wrongMessage` | Shown after an incorrect attempt |
+| `hints` | Optional array of progressive hints — leave `[]` for none. Each tap of "Need a hint?" reveals the next one |
+
+Once unlocked, the browser remembers via `localStorage` (key `story-unlocked`) — the gate won't reappear on that device unless the person clears site data or opens it in a different browser/incognito window.
+
+**This is not real security.** The password lives in plain text in the shipped JavaScript bundle — anyone who opens dev tools and reads the source can find it. It's a soft privacy gate to keep the content from being visible to a casual visitor or search crawler, not a substitute for actual authentication.
 
 ## Deploying
 

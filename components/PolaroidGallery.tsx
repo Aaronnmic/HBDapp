@@ -39,6 +39,15 @@ export default function PolaroidGallery(){
     el.scrollBy({ left: amount, behavior: 'smooth' })
   }
 
+  useEffect(() => {
+    if (active === null) return
+    function handleKeyDown(e: KeyboardEvent){
+      if (e.key === 'Escape') setActive(null)
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [active])
+
   return (
     <section id="gallery" className="py-24">
       <div className="max-w-6xl mx-auto px-6">
@@ -88,10 +97,16 @@ export default function PolaroidGallery(){
           </button>
         </div>
         {active !== null && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-6">
-            <div className="relative max-w-5xl rounded-[2rem] border border-white/10 bg-[#07070a] p-6 shadow-[0_40px_120px_rgba(0,0,0,0.55)] transition-opacity duration-500 opacity-100">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/75 p-6"
+            onClick={() => setActive(null)}
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative my-auto max-h-[90vh] max-w-5xl overflow-y-auto rounded-[2rem] border border-white/10 bg-[#07070a] p-6 shadow-[0_40px_120px_rgba(0,0,0,0.55)] transition-opacity duration-500 opacity-100"
+            >
               <button onClick={() => setActive(null)} className="absolute right-4 top-4 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-white transition hover:bg-white/10">Close</button>
-              <img src={withBasePath(photos[active].src)} alt={photos[active].title} className="w-full rounded-[1.5rem] object-cover" />
+              <img src={withBasePath(photos[active].src)} alt={photos[active].title} className="mx-auto max-h-[65vh] w-auto max-w-full rounded-[1.5rem] object-contain" />
               <div className="mt-5 text-left">
                 <h3 className="text-3xl font-semibold text-white">{photos[active].title}</h3>
                 <p className="mt-3 text-slate-300/90 leading-8">{photos[active].caption}</p>
