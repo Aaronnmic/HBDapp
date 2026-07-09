@@ -11,6 +11,7 @@ export default function PasswordGate({ children }: { children: ReactNode }){
   const [value, setValue] = useState('')
   const [wrong, setWrong] = useState(false)
   const [hintIndex, setHintIndex] = useState(-1)
+  const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
     if (window.localStorage.getItem(STORAGE_KEY) === 'true') setUnlocked(true)
@@ -42,14 +43,24 @@ export default function PasswordGate({ children }: { children: ReactNode }){
         <div className="mb-4 text-4xl">🔒</div>
         <h1 className="mb-2 text-2xl font-semibold text-gradient-romance">{title}</h1>
         <p className="mb-6 text-sm text-[#8A6478]">{subtitle}</p>
-        <input
-          type="password"
-          value={value}
-          onChange={(e) => { setValue(e.target.value); setWrong(false) }}
-          placeholder={placeholder}
-          autoFocus
-          className="w-full rounded-full border border-[#E56AB3]/30 bg-white/70 px-5 py-3 text-center text-[#6B2247] outline-none focus:border-[#E56AB3]"
-        />
+        <div className="relative">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            value={value}
+            onChange={(e) => { setValue(e.target.value); setWrong(false) }}
+            placeholder={placeholder}
+            autoFocus
+            className="w-full rounded-full border border-[#E56AB3]/30 bg-white/70 px-5 py-3 pr-12 text-center text-[#6B2247] outline-none focus:border-[#E56AB3]"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            aria-label={showPassword ? 'Hide password' : 'Show password'}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-lg text-[#8A6478] transition hover:text-[#D6488F]"
+          >
+            {showPassword ? '🙈' : '👁️'}
+          </button>
+        </div>
         {wrong && <p className="mt-3 text-xs text-[#C2185B]">{wrongMessage}</p>}
         <button type="submit" className="mt-5 w-full rounded-full bg-accent px-6 py-3 text-sm font-semibold text-[#3D0F28] transition hover:brightness-110">
           {unlockLabel}
