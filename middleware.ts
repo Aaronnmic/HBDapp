@@ -3,7 +3,9 @@ import { COOKIE_NAME, verifySessionCookie } from './lib/auth'
 
 export async function middleware(req: NextRequest){
   const secret = process.env.SESSION_SECRET
-  if (!secret) return NextResponse.next()
+  if (!secret) {
+    return NextResponse.redirect(new URL('/login', req.url))
+  }
 
   const cookie = req.cookies.get(COOKIE_NAME)?.value
   if (await verifySessionCookie(cookie, secret)) return NextResponse.next()

@@ -76,7 +76,7 @@ How it works:
 | `SITE_PASSWORD` | The password itself. Never appears in code or the client bundle. |
 | `SESSION_SECRET` | Random string used to sign session cookies — generate one with `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
 
-On Vercel: `vercel env add SITE_PASSWORD production` and `vercel env add SESSION_SECRET production` (repeat for `preview` if you use preview deployments), or set them in the dashboard under Project Settings → Environment Variables. Locally, put them in `.env.local` (already gitignored).
+On Vercel, add both variables in Project Settings → Environment Variables. Set `SITE_PASSWORD` to the password you want visitors to enter and `SESSION_SECRET` to a randomly generated value. Make sure the variables are enabled for the deployment environment (Production, and Preview if needed), then redeploy. If `SESSION_SECRET` is missing, protected routes stay locked and login cannot succeed. Locally, put them in `.env.local` (already gitignored).
 
 **Why this needs a real server**: middleware and API routes only run where Next.js has a server runtime (Vercel, Netlify, self-hosted Node). This means the template can no longer be exported as static files — see below.
 

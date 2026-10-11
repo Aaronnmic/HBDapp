@@ -7,6 +7,7 @@ const { title, subtitle, placeholder, unlockLabel, wrongMessage, hintButtonLabel
 export default function LoginPage(){
   const [value, setValue] = useState('')
   const [wrong, setWrong] = useState(false)
+  const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [hintIndex, setHintIndex] = useState(-1)
@@ -15,6 +16,7 @@ export default function LoginPage(){
     e.preventDefault()
     setSubmitting(true)
     setWrong(false)
+    setError('')
     try {
       const res = await fetch('/api/login', {
         method: 'POST',
@@ -23,10 +25,14 @@ export default function LoginPage(){
       })
       if (res.ok) {
         window.location.href = '/'
-      } else {
+      } else if (res.status === 401) {
         setWrong(true)
         setValue('')
+      } else {
+        setError('Password protection is not configured correctly. Please contact the site owner.')
       }
+    } catch {
+      setError('Could not connect to the server. Please try again.')
     } finally {
       setSubmitting(false)
     }
@@ -47,7 +53,7 @@ export default function LoginPage(){
           <input
             type={showPassword ? 'text' : 'password'}
             value={value}
-            onChange={(e) => { setValue(e.target.value); setWrong(false) }}
+            onChange={(e) => { setValue(e.target.value); setWrong(false); setError('') }}
             placeholder={placeholder}
             autoFocus
             className="w-full rounded-full border border-[#5DADE2]/50 bg-white/90 px-5 py-3 pr-12 text-center text-[#082B59] outline-none focus:border-[#1E6DBB]"
@@ -62,6 +68,7 @@ export default function LoginPage(){
           </button>
         </div>
         {wrong && <p className="mt-3 text-xs text-[#B42318]">{wrongMessage}</p>}
+        {error && <p role="alert" className="mt-3 text-xs text-[#B42318]">{error}</p>}
         <button
           type="submit"
           disabled={submitting}
