@@ -1,13 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #FFF6FA;
+
+  --color-bg: #034694;
+
   --color-card: #ffffff99;
-  --color-accent: #E56AB3;
-  --color-accent-soft: #FFB6C1;
-  --color-ink: #5B2347;
-  --color-ink-soft: #8A6478;
-  --shadow-glow: 0 30px 70px rgba(229, 106, 179, 0.18);
+
+  --color-accent: #1E6DBB;
+
+  --color-accent-soft: #8CC8FF;
+
+  --color-ink: #082B59;
+
+  --color-ink-soft: #D6ECFF;
+
+  --shadow-glow: 0 30px 70px rgba(0, 20, 60, 0.35);
+
 }
 
 :root {
@@ -21,15 +29,19 @@ html {
 
 body {
   min-height: 100%;
-  background: #FFF6FA;
-  color: #5B2347;
+  background: #034694;
+  color: #FFFFFF;
   overflow-x: hidden;
 }
 
 h1, h2, h3 {
+
   font-family: var(--font-display), Georgia, serif;
-  color: #4A1B3B;
+
+  color: #FFFFFF;
+
   line-height: 1.2;
+
 }
 
 .font-letter {
@@ -37,12 +49,19 @@ h1, h2, h3 {
 }
 
 .text-gradient-romance {
+
   display: inline-block;
+
   padding-bottom: 0.08em;
-  background: linear-gradient(90deg, #C2185B 0%, #E56AB3 45%, #FF6B9D 100%);
+
+  background: linear-gradient(90deg, #FFFFFF 0%, #8CC8FF 55%, #FFD700 100%);
+
   -webkit-background-clip: text;
+
   background-clip: text;
+
   color: transparent;
+
 }
 
 @keyframes drift-slow {
@@ -66,18 +85,6 @@ h1, h2, h3 {
 }
 
 .animate-float-up { animation: float-up linear infinite; }
-
-@keyframes flutter-up {
-  0% { transform: translate(0, 0) rotate(-8deg); opacity: 0; }
-  8% { opacity: 0.75; }
-  25% { transform: translate(34px, -28vh) rotate(10deg); }
-  50% { transform: translate(-30px, -55vh) rotate(-12deg); }
-  75% { transform: translate(34px, -82vh) rotate(10deg); }
-  92% { opacity: 0.5; }
-  100% { transform: translate(-18px, -112vh) rotate(-6deg); opacity: 0; }
-}
-
-.animate-flutter-up { animation: flutter-up ease-in-out infinite; }
 
 @keyframes pop-up {
   0% { transform: translateY(20px) scale(0.7); opacity: 0; }
@@ -121,11 +128,17 @@ h1, h2, h3 {
 }
 
 .cake-photo {
+
   width: 100%;
+
   height: auto;
+
   display: block;
+
   border-radius: 14px;
-  box-shadow: 0 16px 30px rgba(229, 106, 179, 0.3);
+
+  box-shadow: 0 16px 30px rgba(0, 20, 60, 0.35);
+
 }
 
 .cake-photo-candles {
@@ -207,18 +220,31 @@ h1, h2, h3 {
 
 
 ::selection {
-  background: rgba(229,106,179,0.28);
-  color: #4A1B3B;
+
+  background: rgba(255,255,255,0.3);
+
+  color: #FFFFFF;
+
 }
 
 .bg-card {
-  background: linear-gradient(160deg, rgba(255,255,255,0.8), rgba(255,238,247,0.65));
-  border-color: rgba(229, 106, 179, 0.35);
+
+  background: linear-gradient(
+    160deg,
+    rgba(255,255,255,0.92),
+    rgba(220,238,255,0.78)
+  );
+
+  border-color: rgba(255,255,255,0.45);
+
   backdrop-filter: blur(18px);
+
 }
 
 .text-glow {
-  text-shadow: 0 0 16px rgba(229, 106, 179, 0.15);
+
+  text-shadow: 0 0 16px rgba(93, 173, 226, 0.35);
+
 }
 
 [data-reveal] {

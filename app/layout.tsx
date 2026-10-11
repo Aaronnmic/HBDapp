@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${display.variable} ${body.variable} text-[#5B2347]`}>
+      <body className={`${display.variable} ${body.variable} text-white`}>
         {children}
       </body>
     </html>

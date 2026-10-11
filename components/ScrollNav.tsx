@@ -7,8 +7,6 @@ const sections = [
   { id: 'story', label: 'Story' },
   { id: 'timeline', label: 'Timeline' },
   { id: 'reasons', label: 'Reasons' },
-  { id: 'gallery', label: 'Gallery' },
-  { id: 'voice', label: 'Voice' },
   { id: 'gift', label: 'Gift' },
   { id: 'cake', label: 'Cake' },
   { id: 'ending', label: 'Ending' }
@@ -34,7 +32,7 @@ export default function ScrollNav(){
       <button
         aria-label="Open chapter menu"
         onClick={() => setOpen(true)}
-        className="fixed right-6 bottom-6 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-[#E56AB3]/30 bg-white/70 text-[#6B2247] shadow-glow backdrop-blur-xl transition hover:bg-white/90"
+        className="fixed right-6 bottom-6 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-[#5DADE2]/50 bg-white/90 text-[#034694] shadow-glow backdrop-blur-xl transition hover:bg-white"
       >
         <span className="flex flex-col items-center gap-[3px]">
           <span className="h-[2px] w-4 rounded-full bg-current" />
@@ -50,9 +48,9 @@ export default function ScrollNav(){
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setOpen(false)}
           />
-          <div className="relative flex h-full w-64 max-w-[80vw] flex-col gap-1 border-l border-white/10 bg-[#120a15]/95 p-6 pt-8 shadow-[-20px_0_60px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
+          <div className="relative flex h-full w-64 max-w-[80vw] flex-col gap-1 border-l border-[#5DADE2]/30 bg-[#002B5C]/95 p-6 pt-8 shadow-[-20px_0_60px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
             <div className="mb-4 flex items-center justify-between">
-              <span className="text-xs uppercase tracking-[0.3em] text-pink-200">Chapters</span>
+              <span className="text-xs uppercase tracking-[0.3em] text-[#8CC8FF]">Chapters</span>
               <button aria-label="Close" onClick={() => setOpen(false)} className="text-lg text-slate-300 transition hover:text-white">✕</button>
             </div>
             {sections.map(section => (

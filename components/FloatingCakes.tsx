@@ -2,8 +2,6 @@
 import { useEffect, useState } from 'react'
 
 const PARTICLE_COUNT = 22
-const RISE_GLYPHS = ['❤️', '💗', '✨', '🌸']
-const FLUTTER_GLYPHS = ['🦋']
 
 type Particle = {
   id: number
@@ -11,26 +9,20 @@ type Particle = {
   size: number
   duration: number
   delay: number
-  glyph: string
-  anim: 'animate-float-up' | 'animate-flutter-up'
 }
 
-export default function FloatingHearts(){
+export default function FloatingCakes(){
   const [particles, setParticles] = useState<Particle[]>([])
 
   useEffect(() => {
     setParticles(
       Array.from({ length: PARTICLE_COUNT }, (_, index) => {
-        const isFlutter = index % 4 === 0
-        const glyphs = isFlutter ? FLUTTER_GLYPHS : RISE_GLYPHS
         return {
           id: index,
           left: Math.random() * 100,
-          size: isFlutter ? 20 + Math.random() * 10 : 12 + Math.random() * 16,
-          duration: isFlutter ? 18 + Math.random() * 10 : 14 + Math.random() * 12,
+          size: 18 + Math.random() * 14,
+          duration: 14 + Math.random() * 12,
           delay: Math.random() * -24,
-          glyph: glyphs[index % glyphs.length],
-          anim: isFlutter ? 'animate-flutter-up' : 'animate-float-up',
         }
       })
     )
@@ -41,7 +33,7 @@ export default function FloatingHearts(){
       {particles.map((particle) => (
         <span
           key={particle.id}
-          className={`absolute bottom-[-10%] opacity-0 ${particle.anim}`}
+          className="absolute bottom-[-10%] opacity-0 animate-float-up"
           style={{
             left: `${particle.left}%`,
             fontSize: `${particle.size}px`,
@@ -49,7 +41,7 @@ export default function FloatingHearts(){
             animationDelay: `${particle.delay}s`,
           }}
         >
-          {particle.glyph}
+          🎂
         </span>
       ))}
     </div>

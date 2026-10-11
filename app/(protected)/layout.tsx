@@ -1,12 +1,12 @@
 import InteractiveProvider from '../../context/InteractiveProvider'
 import AmbientBackground from '../../components/AmbientBackground'
-import FloatingHearts from '../../components/FloatingHearts'
+import FloatingCakes from '../../components/FloatingCakes'
 
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
   return (
     <InteractiveProvider>
       <AmbientBackground />
-      <FloatingHearts />
+      <FloatingCakes />
       {children}
     </InteractiveProvider>
   )

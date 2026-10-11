@@ -52,8 +52,8 @@ export default function EasterEggs(){
       {moonMessage && (
         <div className="pointer-events-auto fixed inset-0 flex items-center justify-center bg-black/70 p-6">
           <div className="max-w-md rounded-[2rem] border border-white/10 bg-card p-8 text-center shadow-glow">
-            <p className="text-lg leading-8 text-[#4A1B3B]">{moonMessageText}</p>
-            <button onClick={() => setMoonMessage(false)} className="mt-6 rounded-full border border-[#E56AB3]/30 bg-white/60 px-6 py-2 text-sm text-[#6B2247] hover:bg-white/80">Close</button>
+            <p className="text-lg leading-8 text-[#082B59]">{moonMessageText}</p>
+            <button onClick={() => setMoonMessage(false)} className="mt-6 rounded-full border border-[#5DADE2]/40 bg-white/90 px-6 py-2 text-sm text-[#034694] hover:bg-white">Close</button>
           </div>
         </div>
       )}
@@ -61,8 +61,8 @@ export default function EasterEggs(){
       {heartNote && (
         <div className="pointer-events-auto fixed inset-0 flex items-center justify-center bg-black/70 p-6">
           <div className="max-w-md rounded-[2rem] border border-white/10 bg-card p-8 text-center shadow-glow">
-            <p className="text-lg leading-8 text-[#4A1B3B]">{heartNoteText}</p>
-            <button onClick={() => setHeartNote(false)} className="mt-6 rounded-full border border-[#E56AB3]/30 bg-white/60 px-6 py-2 text-sm text-[#6B2247] hover:bg-white/80">Close</button>
+            <p className="text-lg leading-8 text-[#082B59]">{heartNoteText}</p>
+            <button onClick={() => setHeartNote(false)} className="mt-6 rounded-full border border-[#5DADE2]/40 bg-white/90 px-6 py-2 text-sm text-[#034694] hover:bg-white">Close</button>
           </div>
         </div>
       )}

@@ -37,7 +37,7 @@ export default function FloatingStars() {
         return (
           <div
             key={star.id}
-            className="absolute rounded-full bg-[#FF8FC0] shadow-[0_0_18px_rgba(229,106,179,0.45)] transition-transform duration-300"
+            className="absolute rounded-full bg-[#D6ECFF] shadow-[0_0_18px_rgba(93,173,226,0.65)] transition-transform duration-300"
             style={{
               width: `${star.size}px`,
               height: `${star.size}px`,

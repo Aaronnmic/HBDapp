@@ -37,12 +37,12 @@ export default function LoginPage(){
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex min-h-screen items-center justify-center overflow-y-auto bg-gradient-to-br from-[#FCE4EC] via-[#FFF0F5] to-[#FCE4EC] px-6 py-16">
+    <div className="fixed inset-0 z-50 flex min-h-screen items-center justify-center overflow-y-auto bg-gradient-to-br from-[#002B5C] via-[#034694] to-[#1E6DBB] px-6 py-16">
       <div className="pointer-events-none absolute inset-0 backdrop-blur-3xl" />
       <form onSubmit={handleSubmit} className="relative z-10 w-full max-w-sm rounded-[2rem] border border-white/10 bg-card p-8 text-center shadow-glow backdrop-blur-xl">
         <div className="mb-4 text-4xl">🔒</div>
-        <h1 className="mb-2 text-2xl font-semibold text-gradient-romance">{title}</h1>
-        <p className="mb-6 text-sm text-[#8A6478]">{subtitle}</p>
+        <h1 className="mb-2 text-2xl font-semibold text-[#034694]">{title}</h1>
+        <p className="mb-6 text-sm text-[#4A6A8A]">{subtitle}</p>
         <div className="relative">
           <input
             type={showPassword ? 'text' : 'password'}
@@ -50,33 +50,33 @@ export default function LoginPage(){
             onChange={(e) => { setValue(e.target.value); setWrong(false) }}
             placeholder={placeholder}
             autoFocus
-            className="w-full rounded-full border border-[#E56AB3]/30 bg-white/70 px-5 py-3 pr-12 text-center text-[#6B2247] outline-none focus:border-[#E56AB3]"
+            className="w-full rounded-full border border-[#5DADE2]/50 bg-white/90 px-5 py-3 pr-12 text-center text-[#082B59] outline-none focus:border-[#1E6DBB]"
           />
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
             aria-label={showPassword ? 'Hide password' : 'Show password'}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-lg text-[#8A6478] transition hover:text-[#D6488F]"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-lg text-[#4A6A8A] transition hover:text-[#1E6DBB]"
           >
             {showPassword ? '🙈' : '👁️'}
           </button>
         </div>
-        {wrong && <p className="mt-3 text-xs text-[#C2185B]">{wrongMessage}</p>}
+        {wrong && <p className="mt-3 text-xs text-[#B42318]">{wrongMessage}</p>}
         <button
           type="submit"
           disabled={submitting}
-          className="mt-5 w-full rounded-full bg-accent px-6 py-3 text-sm font-semibold text-[#3D0F28] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+          className="mt-5 w-full rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {unlockLabel}
         </button>
         {hints.length > 0 && (
           <div className="mt-4">
-            {hintIndex >= 0 && <p className="mb-2 text-xs text-[#8A6478]">{hints[hintIndex]}</p>}
+            {hintIndex >= 0 && <p className="mb-2 text-xs text-[#4A6A8A]">{hints[hintIndex]}</p>}
             {hintIndex + 1 < hints.length && (
               <button
                 type="button"
                 onClick={handleHint}
-                className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D6488F] underline"
+                className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1E6DBB] underline"
               >
                 {hintButtonLabel}
               </button>

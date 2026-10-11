@@ -65,9 +65,9 @@ export default function CakeSection(){
   return (
     <section id="cake" className="py-24">
       <div className="max-w-3xl mx-auto px-6 text-center">
-        <div className="text-sm uppercase tracking-[0.4em] text-[#D6488F] mb-4">{chapter}</div>
+        <div className="text-sm uppercase tracking-[0.4em] text-[#8CC8FF] mb-4">{chapter}</div>
         <h2 className="text-4xl md:text-5xl font-semibold text-gradient-romance mb-4">{title}</h2>
-        <p className="mx-auto mb-10 max-w-2xl text-[#6B2247]/80">{intro}</p>
+        <p className="mx-auto mb-10 max-w-2xl text-white/90">{intro}</p>
         <div className="inline-flex flex-col items-center gap-6">
           <div className="bg-card rounded-[2rem] p-6 shadow-glow border border-white/10">
             <div className="cake-photo-scene">
@@ -88,22 +88,22 @@ export default function CakeSection(){
               {!listening && (
                 <button
                   onClick={startListening}
-                  className="rounded-full border border-[#E56AB3]/30 bg-white/60 px-8 py-3 text-sm font-semibold text-[#6B2247] transition hover:bg-white/80"
+                  className="rounded-full border border-[#8CC8FF]/50 bg-white/90 px-8 py-3 text-sm font-semibold text-[#034694] transition hover:bg-white"
                 >
                   {micButtonLabel}
                 </button>
               )}
               <button
                 onClick={handleBlow}
-                className="rounded-full bg-gradient-to-r from-pink-400 via-rose-500 to-fuchsia-500 px-8 py-3 text-sm font-semibold text-black shadow-[0_20px_40px_rgba(255,107,157,0.18)] transition hover:scale-[1.02] hover:brightness-110"
+                className="rounded-full bg-gradient-to-r from-[#5DADE2] via-[#1E6DBB] to-[#034694] px-8 py-3 text-sm font-semibold text-white shadow-[0_20px_40px_rgba(93,173,226,0.25)] transition hover:scale-[1.02] hover:brightness-110"
               >
                 {listening ? listeningLabel : blowButtonLabel}
               </button>
             </div>
           )}
-          {micDenied && <p className="text-sm text-[#8A6478]">{micDeniedText}</p>}
+          {micDenied && <p className="text-sm text-[#D6ECFF]">{micDeniedText}</p>}
         </div>
-        {blown && <p className="mt-10 text-lg text-[#B23A73]">{wishText}</p>}
+        {blown && <p className="mt-10 text-lg text-[#FFD700]">{wishText}</p>}
       </div>
     </section>
   )

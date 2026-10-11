@@ -7,14 +7,13 @@
     "loadingSteps": ["Loading...", "127 memories found.", "Ready when you are."],
     "title": "The Story of Us",
     "subtitle": "A cinematic, intimate launch-style experience built around our memories, whispered moments, and the best parts of being together.",
-    "audioSrc": "/audio/65-roses-hi-nanna.mp3",
+    "audioSrc": "/audio/Best%20Part%20-%20Daniel%20Caesar%20feat.%20H.E.R.%20(Lirik%20Lagu%20Terjemahan).mp3",
     "audioLabel": "Enjoy the music you love."
   },
   "story": {
     "chapter": "Chapter 1",
     "title": "Our Story",
     "slides": [
-      { "title": "The Day We Met", "description": "A first smile that changed everything." },
       { "title": "Late night calls", "description": "The nights we stayed up until sunrise." },
       { "title": "First date", "description": "The night we went to the movies." },
       { "title": "Our first trip", "description": "Every road led to us." }
@@ -25,34 +24,28 @@
     "title": "Our Timeline",
     "entries": [
       {
-        "year": "2023",
-        "title": "We met",
-        "description": "A random moment turned into the start of everything.",
-        "photo": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80"
+        "year": "01",
+        "title": "Late night",
+        "description": "Hours felt like minutes whenever we were together late into the night.",
+        "photo": "/photos/late-night.jpeg"
       },
       {
-        "year": "2023",
-        "title": "First date",
-        "description": "Nervous laughs, easy conversation, and a night that didn't want to end.",
-        "photo": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80"
+        "year": "02",
+        "title": "Strolling around solo with you",
+        "description": "A simple stroll together became another favorite memory.",
+        "photo": "/photos/strolling-around-solo-with-you.jpeg"
       },
       {
-        "year": "2024",
-        "title": "First trip",
-        "description": "New places, same us. Somehow everything felt like home.",
-        "photo": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+        "year": "03",
+        "title": "You're Graduation Day",
+        "description": "So proud of everything you've worked so hard to achieve.",
+        "photo": "/photos/your-graduation-day.jpeg"
       },
       {
-        "year": "2024",
-        "title": "Late night calls",
-        "description": "Hours felt like minutes whenever your voice was on the other end.",
-        "photo": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        "year": "Today",
-        "title": "Your birthday",
-        "description": "And here we are, still writing our story together.",
-        "photo": null
+        "year": "04",
+        "title": "You're my favorite view",
+        "description": "No matter where we are, you're always my favorite view.",
+        "photo": "/photos/youre-my-favorite-view.jpeg"
       }
     ]
   },
@@ -83,51 +76,18 @@
       }
     ]
   },
-  "gallery": {
-    "chapter": "Chapter 4",
-    "title": "Memory Gallery",
-    "photos": [
-      {
-        "title": "Late night city lights",
-        "caption": "That night when the world felt endless.",
-        "src": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        "title": "Cozy coffee mornings",
-        "caption": "Soft light, warm smiles, and easy conversation.",
-        "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        "title": "Sunset escape",
-        "caption": "A golden drive with the windows down.",
-        "src": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        "title": "Beautiful you",
-        "caption": "Beautiful you, my love",
-        "src": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80"
-      }
-    ]
-  },
-  "voice": {
-    "chapter": "Chapter 5",
-    "title": "This is for you",
-    "intro": "Press play to hear a message from me.",
-    "caption": "Happy Birthday my love ❤️",
-    "audioSrc": "/audio/just_the_way_you_are.mp3"
-  },
   "gift": {
-    "chapter": "Chapter 6",
+    "chapter": "Chapter 4",
     "title": "Open the gift",
     "intro": "Tap the box, watch the lid lift, and read what's inside.",
     "buttonLabel": "Open the gift",
     "buttonLabelOpening": "Opening...",
     "buttonLabelOpened": "Opened",
     "tapToOpenLabel": "Tap to open",
-    "letterText": "Dear you,\n\nThis letter has been waiting inside a little box until the perfect moment. Every memory with you feels like a page in our story. I love the way you laugh, the way your hand fits mine, and the way the world feels softer when you're near.\n\nHappy Birthday. This is for you.\n\nLove, me ❤️"
+    "letterText": "happy 23rd birthday, my love. 🤍\n\nsometimes, i still find it hard to believe that the little boy i met back in first grade of elementary school has grown into the man standing beside me today. we have known each other for such a long time, and when i look back at everything we have been through, i realize just how long and beautiful our journey has been. so many things have changed. we have grown, experienced different things, and become different versions of ourselves, but one thing i am always grateful for is that somehow, through all those years, you are still here, and you are still someone who means so much to me.\n\ni know you are incredibly smart, handsome, hardworking, kind, understanding, and thoughtful. but beyond all of those things, i think one of the qualities i admire most about you is how strong you are. life has not always been easy on you. sometimes it feels like fate keeps testing you, putting you through things you never deserved and making you work harder than you should have to. but i know you. and i know that no matter how many times life tries to bring you down, you will always find a way to rise again. somehow, in the end, you will always win.\n\non your 23rd birthday, i hope you meet more people who truly appreciate you, respect you, and treat you with the kindness you deserve. i hope that from now on, life becomes a little gentler with you. may all the effort you put into everything you do eventually lead you to something beautiful. may every step you take bring you closer to the life you dream of, and may the things you have been fighting for finally find their way to you.\n\nand for myself, i have one simple wish : i hope i can continue to be part of that journey.\n\ni want to see you grow, achieve your dreams, and become the best version of yourself. i want to be there when things get difficult, but also be there to celebrate every little victory with you. i want to keep watching you become the person you have always wanted to be.\n\ni hope our journey doesnt end here. i hope that one day, when we are 26 or 27, we can look back at everything we have been through since we were little and realize that we actually made it this far together. i hope we can build the family we have always dreamed about, create a home that feels like our safest place, and live the kind of life we used to imagine when all of this was still just a dream.\n\ni don't know exactly what our future will look like. maybe some things will not happen the way we planned. maybe there will be difficult days, unexpected turns, and moments when we have to be stronger than we thought we could be. but if i could choose, i would still choose to go through all of it with you.\n\nafter all these years,i still want you to be the person i grow with, the person i come home to, and the person i share the little and big moments of life with.\n\nthank you for being a part of my life for so many years. thank you for staying, for trying, for always being there for me, and for being the person you are. i am so proud of how far you have come, and i will always believe that there are still so many beautiful things waiting for you ahead.\n\nHappy 23rd birthday, my love.\n\ni hope that after this, fate will finally be kinder to you. i hope life gives you the people, opportunities, happiness, and love that you deserve. and among all the beautiful things that life brings you, i hope i will still be there, beside you, experiencing them with you.\n\ni love you, and i hope this long journey that started when we were just little kids will continue to be ours. 🤍"
   },
   "cake": {
-    "chapter": "Chapter 7",
+    "chapter": "Chapter 5",
     "title": "Blow out the candles",
     "image": "/photos/cake.jpg",
     "intro": "Make a wish, then blow into your mic — or tap the button if you'd rather not.",
